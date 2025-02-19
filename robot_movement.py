@@ -3,10 +3,10 @@ class Robot:
         self.robot_id = robot_id
         self.rows = rows
         self.cols = cols
-        self.position = (0, 0)
+        self.position = (0, 0)  
 
     def move(self, direction, steps, other_robots_positions):
-        x, y = self.position
+        x, y = self.position 
 
         for _ in range(steps):
             if direction == 'N':
@@ -17,18 +17,30 @@ class Robot:
                 new_position = (x, y + 1)
             elif direction == 'W':
                 new_position = (x, y - 1)
+
+
+            elif direction == 'NE':
+                new_position = (x - 1, y + 1)
+            elif direction == 'NW':
+                new_position = (x - 1, y - 1)
+            elif direction == 'SE':
+                new_position = (x + 1, y + 1)
+            elif direction == 'SW':
+                new_position = (x + 1, y - 1)
             else:
                 print(f"Invalid direction: {direction}")
                 return
 
+            
             if (0 <= new_position[0] < self.rows and
                 0 <= new_position[1] < self.cols and
                 new_position not in other_robots_positions):
                 x, y = new_position
             else:
-                break  
+                break
 
         self.position = (x, y)
+
 
 class Terrain:
     def __init__(self, rows, cols):
@@ -65,15 +77,15 @@ if __name__ == "__main__":
     
     terrain = Terrain(5, 5)
 
-    # Add robots
+    # Add 
     terrain.add_robot(1)
     terrain.add_robot(2)
 
-    # Move robots
+    # Move 
     terrain.move_robot(1, "N4")  
     terrain.move_robot(2, "E3")  
     terrain.move_robot(1, "E2")  
 
-    # Get positions
+    
     print("Robot 1 Position:", terrain.get_robot_position(1))
     print("Robot 2 Position:", terrain.get_robot_position(2))
